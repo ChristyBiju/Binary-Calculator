@@ -2,7 +2,7 @@
 Binary Calculator implemented using linked list and stack
 
 ##Operations which can be performed:
-* + : Addition
+* '+' : Addition
 * - : Subtraction
 * * : Multiplication
 * / : Division
