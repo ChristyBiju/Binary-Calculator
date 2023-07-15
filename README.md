@@ -1,4 +1,4 @@
-# Binary Calculator
+# Binary Calculator (Infinite Precision Calculator)
 Binary calculator implemented using linked list and stack data structures to handle arithmetic operations on large binary numbers.
 
 ## Description
