@@ -7,12 +7,22 @@
 int main()
 {
     char a[1000];
+    printf("\n\n");
+    printf("\t\t\t\t\t\t\t\t\t**********************************************\n");
+    printf("\t\t\t\t\t\t\t\t\t\t\t Christy Biju\n");
+    printf("\t\t\t\t\t\t\t\t\t\t\t MIS : 112003031\n");
+    printf("\t\t\t\t\t\t\t\t\t\t\t DSA-I Project\n");
+    printf("\t\t\t\t\t\t\t\t\t**********************************************\n\n");
+
     while (1)
     {
-        printf("Enter the expression : ");
+        printf("\n >> ");
         scanf("%s", a);
-        list L1, L2;
-        evaluate(L1, L2, a);
+        if(strcmp(a,"q") == 0 || strcmp(a,"quit") == 0){
+            break;
+        }
+        eval_exp(a);
+        printf("\n");
     }
     return 0;
 }

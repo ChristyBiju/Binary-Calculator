@@ -74,7 +74,7 @@ node *rem_zeros(node *head)
 }
 
 int operat(char a)
-// this function is used to check is the character is an operator or not
+// this function is used to check if the character is an operator or not
 {
     if (a == '/' || a == '*' || a == '+' || a == '-' || a == '%' || a == '^')
     {
@@ -498,21 +498,21 @@ list power(list base, list exp)
     node *t = tail(exp);
     int n = count(exp);
     int num = 0;
-    int g = pow(10,2);
-    printf("%d\n", g);
-    
+    int g = pow(10, 2);
+    // printf("%d\n", g);
+
     // to convert the list of exponent to a number
     for (int i = 0; i < n; i++)
     {
         // printf("%d\n", num);
-        int po = pow(10,i);
+        int po = pow(10, i);
         num += (t->data) * po;
         t = t->prev;
-        printf("%d-",i);
-        int x = pow(10,i);
-        printf("%d\n",x);
+        // printf("%d-", i);
+        int x = pow(10, i);
+        // printf("%d\n", x);
     }
-    printf("%d\n", num);
+    // printf("%d\n", num);
     list c1, c2;
     c1 = NULL;
     c2 = NULL;
@@ -535,7 +535,7 @@ list power(list base, list exp)
 }
 
 void evaluate(list L1, list L2, char *a)
-// for evaluating an expression which contaons two numbers
+// for evaluating an expression which contains two numbers
 {
     L1 = NULL;
     L2 = NULL;
@@ -587,27 +587,24 @@ void evaluate(list L1, list L2, char *a)
     traverse(ans);
 }
 
+
 void eval_exp(char *a)
-// to evaluate an expression
 {
-    list c1;
-    c1 = NULL;
-    list c2;
-    c2 = NULL;
-    list c3;
-    c3 = NULL;
-    list c4;
-    c4 = NULL;
-    // s1 and s2 are two stacks used to store doubly linked list of number and operator
+    list c1 = NULL;
+    list c2 = NULL;
+    list c3 = NULL;
+    list c4 = NULL;
     Num_Stack s1;
     char_Stack s2;
     init_Num(&s1);
     init_char(&s2);
     int i = 0;
     char op;
+    // printf("1");
     while (a[i] != '\0')
     {
-        if (!operat(a[i]))
+        // printf("! ");
+        if (operat(a[i]) == 0)
         {
             c1 = append(c1, a[i] - '0');
             i++;
@@ -615,52 +612,68 @@ void eval_exp(char *a)
         else
         {
             push_Num(&s1, c1);
+            // i++;
             c1 = NULL;
-            if (prec(a[i]) > prec(s2->d))
+            // if char stack is not empty
+            if (isEmpty_op(s2) == 0)
+            {
+                if (prec(a[i]) > prec(s2->d))
+                {
+                    push_char(&s2, a[i]);
+                    i++;
+                }
+                else
+                {
+                    // printf("yo");
+                    // i++;
+                    op = pop_char(&s2);
+                    c2 = pop_Num(&s1);
+                    c3 = pop_Num(&s1);
+                    push_char(&s2, a[i]);
+                    i++;
+                    switch (op)
+                    {
+                    case '+':
+                        c4 = addition(c3, c2);
+                        break;
+                    case '-':
+                        c4 = substract(c3, c2);
+                        break;
+                    case '*':
+                        c4 = multiply(c3, c2);
+                        break;
+                    case '/':
+                        c4 = division(c3, c2);
+                        break;
+                    case '%':
+                        c4 = modulo(c3, c2);
+                        break;
+                    case '^':
+                        c4 = power(c3, c2);
+                        break;
+                    default:
+                        printf("Operator not identified.");
+                        break;
+                    }
+                    push_Num(&s1, c4);
+                    c2 = NULL;
+                    c3 = NULL;
+                    c4 = NULL;
+                }
+            }
+            else
             {
                 push_char(&s2, a[i]);
                 i++;
             }
-            else
-            {
-                op = pop_char(&s2);
-                c2 = pop_Num(&s1);
-                c3 = pop_Num(&s1);
-                switch (op)
-                {
-                case '+':
-                    c4 = addition(c3, c2);
-                    break;
-                case '-':
-                    c4 = substract(c3, c2);
-                    break;
-                case '*':
-                    c4 = multiply(c3, c2);
-                    break;
-                case '/':
-                    c4 = division(c3, c2);
-                    break;
-                case '%':
-                    c4 = modulo(c3, c2);
-                    break;
-                case '^':
-                    c4 = power(c3, c2);
-                    break;
-                default:
-                    printf("Operator not identified.");
-                    break;
-                }
-                push_Num(&s1, c4);
-                c2 = NULL;
-                c3 = NULL;
-                c4 = NULL;
-            }
         }
     }
-    while (!isEmpty_op(s2))
-    // when are operators remaining in the stack
+    // traverse(c1);
+    push_Num(&s1, c1); // Push the remaining operand onto s1
+    c1 = NULL;
+
+    while (isEmpty_op(s2) == 0)
     {
-        push_Num(&s1, c1);
         op = pop_char(&s2);
         c2 = pop_Num(&s1);
         c3 = pop_Num(&s1);
