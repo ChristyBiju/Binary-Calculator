@@ -1,26 +1,32 @@
 # Binary-Calculator
-Binary Calculator implemented using linked list and stack
+## Description
+* This project is a Command-line Arbitrary Precision Calculator implemented in C, inspired by the Unix-based command 'bc'.
+* The calculator is designed to perform operations on infinite numbers, allowing for calculations with extremely large numbers.
+  
+<hr>
 
-## Operations which can be performed:
+### Operations which can be performed :
 * '+' : Addition
 * '-' : Subtraction
 * '*' : Multiplication
 * '/' : Division
 * '%' : Modulo
 * '^' : Power
-
-## About Project :
-The calculator can perform operations on infinite numbers <br />
-User can input two number with the operator in the form of num1(operator)num2 {eg : 2+3}
+  
+<hr>
+* Arithmetic Operations: Addition, subtraction, multiplication, division, and modulus operations are supported.
+* Precedence Handling: Expressions are evaluated according to their precedence using parentheses.
+* Arbitrary Precision: The calculator handles numbers with arbitrary precision by utilizing linked list and stack data structures.
 
 ## ScreenShot of the result : 
-![Screenshot (164)](https://user-images.githubusercontent.com/89544124/184129395-17e71667-f796-4a12-9c3b-2d176a99aee6.png)
+![bc_final](https://github.com/ChristyBiju/Binary-Calculator/assets/89544124/ff525f52-5a10-43fd-ab4a-aeb2b0c69505)
+
 
 ## Steps to run the project : 
 ```
 Step 1: Clone the repository.
 Step 2: Run the make command to compile all the required files.
-Step 3: Type ./main [Respective function command] in terminal to run the project.
+Step 3: Type ./main in terminal to run the project.
 ```
 
 
